@@ -1,0 +1,104 @@
+/* Main Section Styling */
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.precautions {
+  color: red; /* Texte en rouge */
+  font-weight: bold; /* Texte en gras pour attirer l'attention */
+  background-color: yellow; /* Fond jaune pour plus de visibilité */
+  padding: 5px; /* Un peu de padding pour séparer du texte */
+  border-radius: 3px; /* Coins arrondis pour un effet plus doux */
+}
+
+/* Home Section Styling */
+.home {
+  max-width: 600px;
+  width: 100%;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+form label {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+form textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-height: 120px;
+  resize: vertical;
+  font-size: 1em;
+}
+
+form button {
+  padding: 12px 20px;
+  background-color: #4CAF50;
+  color: rgb(250, 252, 250);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: #16621a;
+}
+
+form button:disabled {
+  background-color: #11cd20;
+  cursor: not-allowed;
+}
+
+/* Loading Indicator */
+div p {
+  font-size: 1.2em;
+  color: #555;
+}
+
+/* Recommendations Styling */
+h3 {
+  font-size: 1.4em;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 10px;
+}
+
+li {
+  font-size: 1.1em;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+li strong {
+  color: #4CAF50;
+}
+
+/* No Recommendations Message */
+div p {
+  font-size: 1.2em;
+  color: #ff5722;
+}

@@ -1,0 +1,233 @@
+
+<!-- Favicon --><!-- Favicon -->
+<link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+<body>
+  <!--==================== HEADER ====================-->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#" class="nav__logo">
+        <i class="ri-leaf-line nav__logo-icon"></i> Plantex
+      </a>
+      <div class="nav__menu" id="nav-menu">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a href="#home" class="nav__link ">Home</a>
+          </li>
+          <li class="nav__item">
+            <a (click)="scrollToSection('about')" class="nav__link">About</a>
+          </li>
+        <li class="nav__item"> <a (click)="scrollToSection('products')" class="nav__link">Plants</a>
+        </li>
+        
+        <li class="nav__item"><a (click)="scrollToSection('faqs')" class="nav__link">FAQs</a>
+        </li>
+        <li class="nav__item">
+            <a (click)="scrollToSection('contact')" class="nav__link">Contact Us</a>
+          </li>
+          
+        <li class="nav__item">
+            <a routerLink="/search" class="nav__link">Search</a>
+
+          </li>
+          <li class="nav__item">
+            <a routerLink="/reco" class="nav__link">Recommandation</a>
+
+          </li>
+          <li class="nav__item">
+            <a routerLink="/login" class="nav__link">Logout</a>
+
+          </li>
+        
+        </ul>
+        <div class="nav__close" id="nav-close">
+          <i class="ri-close-line"></i>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main">
+    <!-- Home Section -->
+    <section class="home" id="home">
+      <div *ngIf="!isLoading && plante" class="home__container container grid">
+      
+        <img [src]="'http://localhost:8091/assets/images/plante-' + plante.id + '.jpeg'" alt="Plante Image"class="home__img">
+
+        <div class="plant__container container grid">
+          <!-- Plant Information -->
+          <div class="plant__data">
+            <!-- Plant Name -->
+            <h1 class="plant__title">
+              {{ plante.nom }}
+            </h1>
+            
+            <!-- Description -->
+            <p class="plant__description">
+              {{ plante.description }}  </p>
+            
+            <!-- Additional Details -->
+            <div class="plant__details">
+              <p><strong>Properties : </strong> {{ plante.proprietes }}</p>
+              <p><strong>Usage : </strong> {{ plante.utilisations }}</p>
+              <p><strong>Precautions : </strong> {{ plante.precautions }}</p>
+            </div>
+            
+            
+            <!-- Button -->
+            <a href="#more-info" class="button button--flex">
+              Learn More <i class="ri-arrow-right-down-line button__icon"></i>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container my-5" id="more-info">
+      <h2 class="section-title text-center mb-4">More About The Plant</h2>
+
+      <div *ngIf="videos.length > 0; else noVideos">
+        <div *ngFor="let video of videos">
+          <iframe
+            width="560"
+            height="315"
+            [src]="video | safeUrl"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+      <ng-template #noVideos>
+        <p>Aucune vidéo disponible.</p>
+      </ng-template>
+      
+      
+
+<!-- Articles Section -->
+<div class="my-4">
+  <h3>Articles</h3>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <a href="https://www.medicalnewstoday.com/articles/320031" target="_blank">The Healing Powers of Herbal Teas</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://www.sleepfoundation.org/sleep-aids/does-chamomile-tea-make-you-sleep#:~:text=One%20study%20found%20that%20chamomile,that%20causes%20a%20sedative%20effect." target="_blank">How Herbal Teas Can Improve Sleep</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2995283/#:~:text=Chamomile%20has%20been%20valued%20as,fevers%20in%20children%20(36)." target="_blank">The Digestive and Healing Benefits of Plants</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://www.healthline.com/nutrition/11-health-benefits-of-herbs" target="_blank">11 Health Benefits of Common Herbs</a>
+    </li>
+    <li class="list-group-item">
+      <a href="https://www.webmd.com/skin-problems-and-treatments/ss/slideshow-herbal-remedies-for-skin" target="_blank">Herbal Remedies for Skin Care</a>
+    </li>
+  </ul>
+</div>
+
+
+
+
+
+
+      <!-- User Comments Section -->
+      <div class="my-4">
+        <h3>User Comments</h3>
+
+        <!-- Loading Spinner -->
+        <div *ngIf="isLoading" class="spinner-container text-center">
+          <div class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Chargement des détails...</span>
+          </div>
+        </div>
+
+        <!-- Plante Information after loading -->
+        <div *ngIf="!isLoading && plante">
+          <div *ngIf="commentaires.length > 0">
+            <ul class="list-group">
+              <div *ngFor="let commentaire of commentaires" class="list-group-item">
+                <p>{{ commentaire.commentaire }}</p>
+              </div>
+              
+            </ul>
+          </div>
+          <div *ngIf="commentaires.length === 0">
+            <p>Aucun commentaire pour cette plante.</p>
+          </div>
+
+          <!-- Add Comment Section -->
+          <div class="mt-3">
+            <textarea [(ngModel)]="newCommentaire" class="form-control" placeholder="Add a comment..." rows="3"></textarea>
+            <button (click)="addCommentaire()" class="btn btn-success mt-2" [disabled]="!newCommentaire.trim()">Ajouter un commentaire</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!--==================== FOOTER ====================-->
+  <footer class="footer section">
+    <div class="footer__container container grid">
+      <div class="footer__content">
+        <a href="#" class="footer__logo">
+          <i class="ri-leaf-line footer__logo-icon"></i> Plantex
+        </a>
+        <h3 class="footer__title">
+          Subscribe to our newsletter <br> to stay updated
+        </h3>
+        <div class="footer__subscribe">
+          <input type="email" placeholder="Enter your email" class="footer__input">
+          <button class="button button--flex footer__button">
+            Subscribe
+            <i class="ri-arrow-right-up-line button__icon"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="footer__content">
+        <h3 class="footer__title">Our Address</h3>
+        <ul class="footer__data">
+          <li class="footer__information">40000 - Maroc</li>
+          <li class="footer__information">Marrakech - 40100</li>
+          <li class="footer__information">123-456-789</li>
+        </ul>
+      </div>
+
+      <div class="footer__content">
+        <h3 class="footer__title">Contact Us</h3>
+        <ul class="footer__data">
+          <li class="footer__information">+212 604050416</li>
+          <div class="footer__social">
+            <a href="https://www.facebook.com/" class="footer__social-link">
+              <i class="ri-facebook-fill"></i>
+            </a>
+            <a href="https://www.instagram.com/" class="footer__social-link">
+              <i class="ri-instagram-line"></i>
+            </a>
+            <a href="https://twitter.com/" class="footer__social-link">
+              <i class="ri-twitter-fill"></i>
+            </a>
+          </div>
+        </ul>
+      </div>
+
+      <div class="footer__content">
+        <h3 class="footer__title">
+          We accept all credit cards
+        </h3>
+        <div class="footer__cards">
+          <img src="assets/img/card1.png" alt="" class="footer__card">
+          <img src="assets/img/card2.png" alt="" class="footer__card">
+          <img src="assets/img/card3.png" alt="" class="footer__card">
+          <img src="assets/img/card4.png" alt="" class="footer__card">
+        </div>
+      </div>
+    </div>
+    <p class="footer__copy">&#169; Bedimcode. All rights reserved</p>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>

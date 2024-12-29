@@ -1,0 +1,85 @@
+<link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+<body>
+  <!--==================== HEADER ====================-->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#" class="nav__logo">
+        <i class="ri-leaf-line nav__logo-icon"></i> Plantex
+      </a>
+      <div class="nav__menu" id="nav-menu">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="#home" class="nav__link ">Home</a></li>
+          <li class="nav__item">
+            <a (click)="scrollToSection('about')" class="nav__link">About</a>
+          </li>
+        <li class="nav__item"> <a (click)="scrollToSection('products')" class="nav__link">Plants</a>
+        </li>
+        
+        <li class="nav__item"><a (click)="scrollToSection('faqs')" class="nav__link">FAQs</a>
+        </li>
+        <li class="nav__item">
+            <a (click)="scrollToSection('contact')" class="nav__link">Contact Us</a>
+          </li>
+          
+        <li class="nav__item">
+            <a routerLink="/search" class="nav__link">Search</a>
+
+          </li>
+          <li class="nav__item">
+            <a routerLink="/reco" class="nav__link">Recommandation</a>
+
+          </li>
+          <li class="nav__item">
+            <a routerLink="/login" class="nav__link">Logout</a>
+
+          </li>
+        </ul>
+        <div class="nav__close" id="nav-close">
+          <i class="ri-close-line"></i>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main">
+    <!-- Home Section -->
+    <section class="home" id="home">
+      <!-- Form Section -->
+      <div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <label for="antecedents">Your health needs :</label>
+          <textarea
+            id="antecedents"
+            formControlName="antecedents"
+            placeholder="Exemple : Hypertension, Diabète, Fatigue"
+          ></textarea>
+
+          <button type="submit" [disabled]="form.invalid || isLoading">Obtenir des recommandations</button>
+        </form>
+      </div>
+
+      <!-- Loading Indicator -->
+      <div *ngIf="isLoading">
+        <p>Chargement des recommandations...</p>
+      </div>
+
+      <!-- Recommendations -->
+      <div *ngIf="!isLoading && recommandations.length > 0">
+       
+        <ul>
+          <li *ngFor="let recommandation of recommandations">
+            <strong>{{ recommandation.nom }}</strong> - {{ recommandation.description }} - 
+            <span class="precautions">{{ recommandation.precautions }}</span>
+          </li>
+        </ul>
+        
+      </div>
+
+      <!-- No Recommendations Message -->
+      <div *ngIf="!isLoading && recommandations.length === 0 && form.valid">
+        <p>Aucune recommandation trouvée pour vos besoins.</p>
+      </div>
+    </section>
+  </main>
+</body>

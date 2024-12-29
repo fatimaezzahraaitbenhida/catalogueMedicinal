@@ -1,0 +1,177 @@
+<body>
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#" class="nav__logo">
+        <i class="ri-leaf-line nav__logo-icon"></i> Plantex
+      </a>
+
+      <div class="nav__menu" id="nav-menu">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a href="#home" class="nav__link ">Home</a>
+          </li>
+          <li class="nav__item">
+            <a (click)="scrollToSection('about')" class="nav__link">About</a>
+          </li>
+        <li class="nav__item"> <a (click)="scrollToSection('products')" class="nav__link">Plants</a>
+        </li>
+        
+        <li class="nav__item"><a (click)="scrollToSection('faqs')" class="nav__link">FAQs</a>
+        </li>
+        <li class="nav__item">
+            <a (click)="scrollToSection('contact')" class="nav__link">Contact Us</a>
+          </li>
+          
+        <li class="nav__item">
+            <a routerLink="/search" class="nav__link">Search</a>
+
+          </li>
+          <li class="nav__item">
+            <a routerLink="/reco" class="nav__link">Recommandation</a>
+
+          </li>
+          <li class="nav__item">
+            <a routerLink="/login" class="nav__link">Logout</a>
+
+          </li>
+        </ul>
+
+        <div class="nav__close" id="nav-close">
+          <i class="ri-close-line"></i>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Section -->
+  <main class="main"></main>
+
+  <!-- Home Section -->
+  <section class="home" id="search">
+    <div class="home__container container">
+      <div class="home__data">
+        <h1 class="home__title">Advanced Plant Search</h1>
+        
+        <!-- Search Box -->
+        <div class="container">
+          <div class="search-form">
+            <form (ngSubmit)="onSearch()" id="advanced-search-form" class="row g-3">
+              <div class="form-group">
+                <label for="nom" class="form-label">Name</label>
+                <input type="text" id="nom" [(ngModel)]="searchParams.nom" name="nom" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label for="famille">Family</label>
+                <input type="text" id="famille" [(ngModel)]="searchParams.famille" name="famille" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label for="proprietes">Properties</label>
+                <input type="text" id="proprietes" [(ngModel)]="searchParams.proprietes" name="proprietes" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label for="regionGeographique">Geographical Region</label>
+                <input type="text" id="regionGeographique" [(ngModel)]="searchParams.regionGeographique" name="regionGeographique" class="form-control" />
+              </div>
+
+              <button type="submit" class="btn btn-success">Search</button>
+            </form>
+          </div>
+
+          <!-- Search Results Section -->
+          <div class="album py-5 bg-light" *ngIf="plantes.length > 0">
+            <div class="container">
+              <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div *ngFor="let plante of plantes" class="col">
+                  <div class="card h-100">
+                    <img [src]="'http://localhost:8091/assets/images/plante-' + plante.id + '.jpeg'" alt="{{ plante.nom }}" class="card-img-top" />
+                    <div class="card-body">
+                      <h5 class="card-title">{{ plante.nom }}</h5>
+                      <p class="card-text"><strong>Family:</strong> {{ plante.famille }}</p>
+                      <p class="card-text"><strong>Properties:</strong> {{ plante.proprietes }}</p>
+                      <p class="card-text"><strong>Geographical Region:</strong> {{ plante.regionGeographique }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Message if no plant is found -->
+          <div *ngIf="plantes.length === 0">
+            <p>No plant found based on the search criteria.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer section">
+    <div class="footer__container container grid">
+      <div class="footer__content">
+        <a href="#" class="footer__logo">
+            <i class="ri-leaf-line footer__logo-icon"></i> Plantex
+        </a>
+
+        <h3 class="footer__title">
+            Subscribe to our newsletter <br> to stay updated
+        </h3>
+
+        <div class="footer__subscribe">
+            <input type="email" placeholder="Enter your email" class="footer__input">
+
+            <button class="button button--flex footer__button">
+                Subscribe
+                <i class="ri-arrow-right-up-line button__icon"></i>
+            </button>
+        </div>
+      </div>
+      <div class="footer__content">
+        <h3 class="footer__title">Our Address</h3>
+        <ul class="footer__data">
+          <li class="footer__information">40000 - Maroc</li>
+          <li class="footer__information">Marrakech - 40100</li>
+          <li class="footer__information">123-456-789</li>
+        </ul>
+      </div>
+
+      <div class="footer__content">
+        <h3 class="footer__title">Contact Us</h3>
+        <ul class="footer__data">
+          <li class="footer__information">+212 604050416</li>
+          <div class="footer__social">
+            <a href="https://www.facebook.com/" class="footer__social-link">
+              <i class="ri-facebook-fill"></i>
+            </a>
+            <a href="https://www.instagram.com/" class="footer__social-link">
+              <i class="ri-instagram-line"></i>
+            </a>
+            <a href="https://twitter.com/" class="footer__social-link">
+              <i class="ri-twitter-fill"></i>
+            </a>
+          </div>
+        </ul>
+      </div>
+
+      <div class="footer__content">
+        <h3 class="footer__title">
+          We accept all credit cards
+        </h3>
+        <div class="footer__cards">
+          <img src="assets/img/card1.png" alt="" class="footer__card">
+          <img src="assets/img/card2.png" alt="" class="footer__card">
+          <img src="assets/img/card3.png" alt="" class="footer__card">
+          <img src="assets/img/card4.png" alt="" class="footer__card">
+        </div>
+      </div>
+    </div>
+    <p class="footer__copy">&#169; Bedimcode. All rights reserved</p>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>

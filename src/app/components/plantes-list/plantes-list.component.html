@@ -1,0 +1,24 @@
+
+<div *ngIf="!isLoading && plantes.length > 0" class="container mt-4">
+  <h2 class="text-center mb-4">Liste des Plantes Médicinales</h2>
+  <div class="product__container grid">
+    <article class="product__card" *ngFor="let plante of plantes">
+      
+      <!-- Image en haut -->
+      <img [src]="'http://localhost:8091/assets/images/plante-' + plante.id + '.jpeg'" alt="Plante Image" class="home__img">
+
+      <!-- Section de détails de la plante -->
+      <div class="plant__container container grid">
+        <h3 class="product__title">{{ plante.nom }}</h3>
+        <p class="product__description">{{ plante.description }}</p>
+
+        <!-- Bouton pour voir les détails -->
+        <button class="button--flex product__button">
+          <i class="ri-shopping-bag-line"></i>
+          Voir les détails
+        </button>
+      </div>
+      
+    </article>
+  </div>
+</div>
